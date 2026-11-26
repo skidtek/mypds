@@ -1,0 +1,33 @@
+[Unit]
+Description=My Personal Digital Space
+After=network-online.target postgresql.service
+Wants=network-online.target
+Requires=postgresql.service
+
+[Service]
+Type=simple
+User=mypds
+Group=mypds
+EnvironmentFile=/etc/mypds/mypds.env
+ExecStart=/opt/mypds/current/venv/bin/mypds serve
+Restart=on-failure
+RestartSec=5
+TimeoutStopSec=20
+
+# Hardening (works in an unprivileged LXC; see docs/install.md if a directive fails)
+NoNewPrivileges=yes
+ProtectSystem=strict
+ProtectHome=yes
+PrivateTmp=yes
+ReadWritePaths=/var/lib/mypds
+CapabilityBoundingSet=
+AmbientCapabilities=
+RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6
+RestrictSUIDSGID=yes
+LockPersonality=yes
+RestrictRealtime=yes
+SystemCallArchitectures=native
+UMask=0027
+
+[Install]
+WantedBy=multi-user.target

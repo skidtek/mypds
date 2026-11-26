@@ -1,0 +1,8 @@
+[Unit]
+Description=My Personal Digital Space backup
+After=postgresql.service
+
+[Service]
+Type=oneshot
+ExecStart=/opt/mypds/current/deploy/backup.sh
+Nice=10
