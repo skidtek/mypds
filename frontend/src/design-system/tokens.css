@@ -1,0 +1,75 @@
+/*
+ * Design system — My Personal Digital Space
+ * Thème unique : glassmorphism. Les fonds d'écran (clair / sombre) ne changent que des variables.
+ * --surface-alpha, --blur et --accent sont pilotés par les préférences utilisateur.
+ */
+:root {
+  --font-sans: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Inter Variable', 'Segoe UI', system-ui, sans-serif;
+  --font-display: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Inter Variable', system-ui, sans-serif;
+
+  --accent: #0a84ff;
+  --accent-soft: color-mix(in srgb, var(--accent) 14%, transparent);
+  --blur: 24px;
+  --surface-alpha: 0.55;
+
+  --radius-xs: 8px;
+  --radius-sm: 12px;
+  --radius-md: 16px;
+  --radius-card: 24px;
+  --radius-pill: 999px;
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+
+  --ok: #30c85e;
+  --warn: #ff9f0a;
+  --down: #ff453a;
+  --unknown: #8e8e93;
+
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur-fast: 160ms;
+  --dur: 280ms;
+  --dur-slow: 620ms;
+
+  /* Thème clair par défaut */
+  --text-1: #1c2340;
+  --text-2: rgb(28 35 64 / 0.66);
+  --text-3: rgb(28 35 64 / 0.46);
+  --surface-rgb: 255 255 255;
+  --surface: rgb(var(--surface-rgb) / var(--surface-alpha));
+  --surface-strong: rgb(var(--surface-rgb) / calc(var(--surface-alpha) + 0.2));
+  --surface-hover: rgb(var(--surface-rgb) / calc(var(--surface-alpha) + 0.12));
+  --surface-border: rgb(255 255 255 / 0.65);
+  --hairline: rgb(28 35 64 / 0.08);
+  --shadow-card: 0 1px 1px rgb(24 32 64 / 0.03), 0 8px 24px -6px rgb(24 32 64 / 0.1),
+    0 30px 60px -24px rgb(24 32 64 / 0.14);
+  --shadow-float: 0 20px 50px -12px rgb(24 32 64 / 0.28);
+  --scrim: rgb(240 243 250 / 0.12);
+  --focus-ring: 0 0 0 3px color-mix(in srgb, var(--accent) 45%, transparent);
+  color-scheme: light;
+}
+
+:root[data-mode='dark'] {
+  --text-1: #f2f4fb;
+  --text-2: rgb(242 244 251 / 0.7);
+  --text-3: rgb(242 244 251 / 0.48);
+  --surface-rgb: 30 34 52;
+  --surface-border: rgb(255 255 255 / 0.09);
+  --hairline: rgb(255 255 255 / 0.08);
+  --shadow-card: 0 1px 1px rgb(0 0 0 / 0.2), 0 10px 30px -8px rgb(0 0 0 / 0.45);
+  --shadow-float: 0 24px 60px -12px rgb(0 0 0 / 0.6);
+  --scrim: rgb(8 10 20 / 0.35);
+  color-scheme: dark;
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  :root {
+    --surface-alpha: 0.92 !important;
+    --blur: 0px !important;
+  }
+}

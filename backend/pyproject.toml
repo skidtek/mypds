@@ -1,0 +1,61 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mypds"
+version = "1.0.0"
+description = "My Personal Digital Space: a self-hosted start page and homelab cockpit"
+license = "AGPL-3.0-or-later"
+requires-python = ">=3.13"
+dependencies = [
+  "fastapi>=0.120",
+  "uvicorn[standard]>=0.30",
+  "pydantic>=2.9",
+  "pydantic-settings>=2.6",
+  "sqlalchemy[asyncio]>=2.0.36",
+  "asyncpg>=0.30",
+  "alembic>=1.14",
+  "argon2-cffi>=23.1",
+  "cryptography>=43",
+  "httpx>=0.28",
+  "feedparser>=6.0.11",
+  "defusedxml>=0.7.1",
+  "nh3>=0.2.18",
+  "icalendar>=6.0",
+  "recurring-ical-events>=3.3",
+  "python-multipart>=0.0.18",
+  "pysnmp>=7.1,<8",  # Synology (SNMP v3, ADR-0013)
+]
+
+[project.urls]
+Homepage = "https://github.com/skidtek/mypds"
+Issues = "https://github.com/skidtek/mypds/issues"
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "pytest-asyncio>=0.24", "respx>=0.21", "ruff>=0.8"]
+
+[project.scripts]
+mypds = "mypds.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "session"
+asyncio_default_test_loop_scope = "session"
+testpaths = ["tests"]
+pythonpath = ["src", "."]
+
+[tool.ruff]
+line-length = 120
+target-version = "py313"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "S", "ASYNC"]
+ignore = ["S101", "B008", "ASYNC109"]  # B008 : motif Depends() de FastAPI
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["S104", "S105", "S106"]
+"src/mypds/migrations/*" = ["E501"]

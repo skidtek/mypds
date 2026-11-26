@@ -1,0 +1,78 @@
+/*
+ * Fonds d'écran intégrés : illustrations originales générées par scripts/wallpapers/generate.py (2560 × 1440).
+ * Chaque fond existe en version claire et sombre ; la version suit le mode (data-mode).
+ * Chaque règle sert à la fois l'arrière-plan réel et les aperçus des réglages (.pv-<fond>-<mode>).
+ */
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  transition: background var(--dur-slow) var(--ease);
+}
+.backdrop::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--scrim);
+}
+
+/* --- Nature --- */
+:root[data-bg='nature']:not([data-mode='dark']) .backdrop {
+  background: url('../assets/wallpapers/nature-light.webp') center / cover no-repeat, #c9c4d8;
+}
+.pv-nature-light {
+  background: url('../assets/wallpapers/thumbs/nature-light.webp') center / cover no-repeat, #c9c4d8;
+}
+:root[data-bg='nature'][data-mode='dark'] .backdrop {
+  background: url('../assets/wallpapers/nature-dark.webp') center / cover no-repeat, #142040;
+}
+.pv-nature-dark {
+  background: url('../assets/wallpapers/thumbs/nature-dark.webp') center / cover no-repeat, #142040;
+}
+
+/* --- Abstrait --- */
+:root[data-bg='abstract']:not([data-mode='dark']) .backdrop {
+  background: url('../assets/wallpapers/abstract-light.webp') center / cover no-repeat, #b9c4f2;
+}
+.pv-abstract-light {
+  background: url('../assets/wallpapers/thumbs/abstract-light.webp') center / cover no-repeat, #b9c4f2;
+}
+:root[data-bg='abstract'][data-mode='dark'] .backdrop {
+  background: url('../assets/wallpapers/abstract-dark.webp') center / cover no-repeat, #141a4a;
+}
+.pv-abstract-dark {
+  background: url('../assets/wallpapers/thumbs/abstract-dark.webp') center / cover no-repeat, #141a4a;
+}
+
+/* --- Minimaliste --- */
+:root[data-bg='minimal']:not([data-mode='dark']) .backdrop {
+  background: url('../assets/wallpapers/minimal-light.webp') center / cover no-repeat, #efe6dc;
+}
+.pv-minimal-light {
+  background: url('../assets/wallpapers/thumbs/minimal-light.webp') center / cover no-repeat, #efe6dc;
+}
+:root[data-bg='minimal'][data-mode='dark'] .backdrop {
+  background: url('../assets/wallpapers/minimal-dark.webp') center / cover no-repeat, #1b2340;
+}
+.pv-minimal-dark {
+  background: url('../assets/wallpapers/thumbs/minimal-dark.webp') center / cover no-repeat, #1b2340;
+}
+
+/* --- IT --- */
+:root[data-bg='it']:not([data-mode='dark']) .backdrop {
+  background: url('../assets/wallpapers/it-light.webp') center / cover no-repeat, #d9e0f2;
+}
+.pv-it-light {
+  background: url('../assets/wallpapers/thumbs/it-light.webp') center / cover no-repeat, #d9e0f2;
+}
+:root[data-bg='it'][data-mode='dark'] .backdrop {
+  background: url('../assets/wallpapers/it-dark.webp') center / cover no-repeat, #0e1a36;
+}
+.pv-it-dark {
+  background: url('../assets/wallpapers/thumbs/it-dark.webp') center / cover no-repeat, #0e1a36;
+}
+
+/* --- Personnel : images importées (variables posées par applyTheme) --- */
+:root[data-bg='custom'] .backdrop {
+  background: var(--wallpaper, #8a94b8) center / cover no-repeat, #8a94b8;
+}

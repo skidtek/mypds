@@ -1,0 +1,21 @@
+/* --- Changement de page --- */
+/* Fondu court entre les pages ; Home ⇄ Cockpit est instantané (voir instantNav). */
+.page-enter-active,
+.page-leave-active {
+  transition: opacity 150ms var(--ease);
+}
+.page-leave-active {
+  position: absolute;
+  inset: 0;
+}
+.page-enter-from,
+.page-leave-to {
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-enter-active,
+  .page-leave-active {
+    transition: none;
+  }
+}
