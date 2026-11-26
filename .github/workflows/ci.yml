@@ -24,7 +24,7 @@ jobs:
     env:
       MYPDS_TEST_DATABASE_URL: postgresql+asyncpg://mypds:mypds@localhost:5432/mypds_test
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: actions/setup-python@v5
         with:
           python-version: "3.13"
@@ -37,7 +37,7 @@ jobs:
   frontend:
     runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: actions/setup-node@v4
         with:
           node-version: "22"
@@ -50,5 +50,5 @@ jobs:
   scripts:
     runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - run: shellcheck -S warning deploy/*.sh deploy/proxmox/*.sh scripts/*.sh
