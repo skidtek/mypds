@@ -1,0 +1,54 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  backend:
+    runs-on: ubuntu-24.04
+    services:
+      postgres:
+        image: postgres:17
+        env:
+          POSTGRES_USER: mypds
+          POSTGRES_PASSWORD: mypds
+          POSTGRES_DB: mypds_test
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd "pg_isready -U mypds" --health-interval 5s --health-timeout 5s --health-retries 10
+    env:
+      MYPDS_TEST_DATABASE_URL: postgresql+asyncpg://mypds:mypds@localhost:5432/mypds_test
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+          cache: pip
+          cache-dependency-path: backend/pyproject.toml
+      - run: pip install -e "backend[dev]"
+      - run: ruff check backend && ruff format --check backend
+      - run: python -m pytest -q --rootdir backend backend/tests
+
+  frontend:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+      - run: npm --prefix frontend ci
+      - run: npm --prefix frontend run typecheck
+      - run: npm --prefix frontend test
+
+  scripts:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - run: shellcheck -S warning deploy/*.sh deploy/proxmox/*.sh scripts/*.sh

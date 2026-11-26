@@ -1,0 +1,20 @@
+name: Idea or connector request
+description: Suggest an improvement or a new device to support
+labels: [enhancement]
+body:
+  - type: textarea
+    id: need
+    attributes:
+      label: What would you like to do?
+      description: Describe the need rather than the solution. What are you trying to see or achieve?
+    validations:
+      required: true
+  - type: textarea
+    id: idea
+    attributes:
+      label: How do you imagine it?
+  - type: textarea
+    id: api
+    attributes:
+      label: For a new connector
+      description: Which device and version? Does it have a documented, read-only API? Links help a lot.

@@ -1,0 +1,40 @@
+name: Bug report
+description: Something doesn't work as expected
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to report this. **Security issues don't belong here**: please use the private report described in SECURITY.md.
+        Before pasting logs or screenshots, remove any addresses, names or tokens you'd rather keep private.
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened?
+      description: What did you do, what did you expect, and what happened instead?
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: MyPDS version
+      description: Shown in the release archive name, or `cat /opt/mypds/current/VERSION`.
+      placeholder: "1.0.0"
+    validations:
+      required: true
+  - type: input
+    id: device
+    attributes:
+      label: Device and firmware (if a connector is involved)
+      placeholder: "Proxmox VE 9.1, UniFi Network 11.0, DSM 7.2…"
+  - type: input
+    id: browser
+    attributes:
+      label: Browser and device
+      placeholder: "Safari on iPhone, Firefox on Linux…"
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs
+      description: "`journalctl -u mypds -n 100` from the container, if relevant."
+      render: text
