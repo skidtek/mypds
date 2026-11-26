@@ -8,6 +8,10 @@ updates:
     schedule: { interval: weekly }
     groups:
       frontend: { patterns: ["*"] }
+    ignore:
+      # vue-tsc relies on TypeScript's lib/tsc, removed in TypeScript 7: upgrade by hand once vue-tsc supports it
+      - dependency-name: typescript
+        update-types: ["version-update:semver-major"]
   - package-ecosystem: github-actions
     directory: /
     schedule: { interval: weekly }
